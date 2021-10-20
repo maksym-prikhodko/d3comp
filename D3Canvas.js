@@ -2,7 +2,7 @@ import React from "react"
 export default class D3Canvas extends React.Component {
 	constructor( props ){
 		super( props );
-		this.id = props.id || Math.round( ( new Date() ).getTime() );
+		this.id = ( props.id || Math.round( ( new Date() ).getTime() ) );
 		this.data = ( props.data ? props.data : [] );
 		this.chart = ( props.chart ? props.chart : null );
 		this._props = { ...props };
@@ -24,7 +24,7 @@ export default class D3Canvas extends React.Component {
 	shouldComponentUpdate( newProps, newState ){
 		if( this.data !== newProps.data ){
 			this.data = newProps.data;
-			this.chart.update( this.data ).catch( err => console.log( err ) );
+			this.chart.update( this.data ).catch( err => console.error( err ) );
 		}
 		return false; 
 	}
