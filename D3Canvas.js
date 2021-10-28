@@ -2,12 +2,12 @@ import React from "react"
 export default class D3Canvas extends React.Component {
 	constructor( props ){
 		super( props );
-		this.id = ( props.id || Math.round( ( new Date() ).getTime() ) );
-		this.data = ( props.data ? props.data : [] );
-		this.chart = ( props.chart ? props.chart : null );
 		this._props = { ...props };
 		delete this._props.data;  
 		delete this._props.chart; 
+		this.id = ( props.id || Math.round( ( new Date() ).getTime() ) );
+		this.data = ( props.data ? props.data : [] );
+		this.chart = ( props.chart ? new props.chart( this._props ) : null );
 	}
 	componentDidMount(){
 		if( this.chart === null )
