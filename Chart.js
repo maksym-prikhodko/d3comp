@@ -19,6 +19,7 @@ export default class Chart {
 		this.SVG = null;
 		this.create = this.create.bind( this );
 		this.destroy = this.destroy.bind( this );
+		return new.target;
 	}
 	create( canvasNode, data = [], otherProps = {} ){
 		return new Promise( ( res, rej ) => {

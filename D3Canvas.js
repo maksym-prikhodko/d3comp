@@ -7,7 +7,10 @@ export default class D3Canvas extends React.Component {
 		delete this._props.chart; 
 		this.id = ( props.id || Math.round( ( new Date() ).getTime() ) );
 		this.data = ( props.data ? props.data : [] );
-		this.chart = ( props.chart ? new props.chart( this._props ) : null );
+		if( props.chart )
+			this.chart = new props.chart( this._props );
+		else
+			this.chart = null;
 	}
 	componentDidMount(){
 		if( this.chart === null )
