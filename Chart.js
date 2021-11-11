@@ -1,4 +1,3 @@
-const d3 = window.d3;
 export default class Chart {
 	constructor( props ){
 		this.id      = ( props.id || "D3_CHART" );
@@ -15,6 +14,7 @@ export default class Chart {
 			-this.margin.top
 			-this.margin.bottom
 			-300;
+		this.d3 = window.d3;
 		this.canvas = null;
 		this.SVG = null;
 		this.create = this.create.bind( this );
