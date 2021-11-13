@@ -12,8 +12,7 @@ export default class Chart {
 			-this.margin.right;
 		this.height = ( props.height || window.screen.availHeight )
 			-this.margin.top
-			-this.margin.bottom
-			-300;
+			-this.margin.bottom;
 		this.d3 = window.d3;
 		this.canvas = null;
 		this.SVG = null;
