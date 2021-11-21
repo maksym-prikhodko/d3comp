@@ -1,5 +1,9 @@
 export default class Chart {
-	constructor( props ){
+	constructor( props = {} ){
+		if( !window.d3 )
+			throw new Error( "D3 is not loaded" );
+		if( !props.id )
+			throw new Error( "id property is required" );
 		this.id      = ( props.id || "D3_CHART" );
 		this.margin  = {
 			top    : ( props.topMargin    || 20 ),
@@ -7,20 +11,18 @@ export default class Chart {
 			bottom : ( props.bottomMargin || 20 ),
 			left   : ( props.leftMargin   || 20 )
 		}
+		this.totalWidth  = ( props.width || window.screen.availWidth );
+		this.totalHeight = ( props.height || window.screen.availHeight );
 		this.width = ( props.width || window.screen.availWidth )
 			-this.margin.left
 			-this.margin.right;
 		this.height = ( props.height || window.screen.availHeight )
 			-this.margin.top
 			-this.margin.bottom;
-		this.d3 = window.d3;
-		this.canvas = null;
-		this.SVG = null;
-		this.create = this.create.bind( this );
+		this.create  = this.create.bind( this );
 		this.destroy = this.destroy.bind( this );
-		return new.target;
 	}
-	create( canvasNode, data = [], otherProps = {} ){
+	async create( canvasNode, data = [], otherProps = {} ){
 		return new Promise( ( res, rej ) => {
 			rej( "Children of Chart must have a create method" );
 		} );
@@ -32,10 +34,11 @@ export default class Chart {
 	}
 	destroy(){
 		return new Promise( ( res, rej ) => {
-			d3.select( this.canvas )
+			window.d3.select( `#${this.id}` )
 			  .selectAll( "*" )
 				.remove()
 				.on( "end", res );
 		});
 	}
 }
+export { Chart }
