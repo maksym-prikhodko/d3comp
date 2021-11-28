@@ -4,6 +4,7 @@ export default class Chart {
 			throw new Error( "D3 is not loaded" );
 		if( !props.id )
 			throw new Error( "id property is required" );
+		this.d3      = window.d3;
 		this.id      = ( props.id || "D3_CHART" );
 		this.margin  = {
 			top    : ( props.topMargin    || 20 ),
